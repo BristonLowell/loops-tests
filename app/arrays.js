@@ -4,6 +4,9 @@
 // output: ['is', 'a', 'split', 'sentence.', 'This']
 
 function rearranger(arr) {
+    let newArr = arr.shift()
+    arr[arr.length] = newArr
+    return arr
 }
 
 
@@ -16,6 +19,8 @@ function rearranger(arr) {
 // output: 42
 
 function largestNum(arr) {
+    return Math.max(...arr)
+
 }
 
 
@@ -28,6 +33,8 @@ function largestNum(arr) {
 // output: [16, 8, 4, 28]
 
 function elemsTimesLength(arr) {
+    let newArr = arr.map(x => x * arr.length)
+    return (newArr)
 }
 
 
@@ -41,7 +48,14 @@ function elemsTimesLength(arr) {
 // Primitive data types - https://developer.mozilla.org/en-US/docs/Glossary/Primitive
 
 function arrayFlattener(arr) {
+    let newArr = arr.flat(50)
+    for (let i = 0; i < newArr.length; i++) {
 
+        if (typeof newArr[i] == 'object') {
+            newArr.splice(i, 1)
+        }
+    }
+    return (newArr)
 }
 
 
@@ -76,6 +90,16 @@ let flights = [{
 
 function flightCost(destination, firstClass) {
     //***hint: use the find method***
+    let ticketPrice
+
+    if (firstClass) {
+        ticketPrice = flights.find(key => key.to == destination.toUpperCase()).prices.firstClass
+    }
+    else {
+        ticketPrice = flights.find(key => key.to == destination.toUpperCase()).prices.standard
+
+    }
+    return (ticketPrice)
 
 }
 
@@ -97,7 +121,16 @@ let staff = [{ id: 1, name: 'Jon' }, { id: 2, name: 'Yuli' }, { id: 21, name: 'P
 { id: 881, name: 'Paul' }, { id: 0, name: 'Jon' }, { id: 999, name: 'Timma' }]
 
 function findById(id) {
-
+    let user = staff.find(key => key.id == id)
+    let error = {
+        error: "No user with that id."
+    }
+    if (user) {
+        return (user)
+    }
+    else {
+        return (error)
+    }
 }
 
 
@@ -124,4 +157,15 @@ let theBand = {
 }
 
 function bandMemberDetails(name) {
+    let members = theBand.members
+    let person = members.find(key => key.name == name).name
+    let instrument = members.find(key => key.name == name).instrument
+    let str = ""
+    str = person + " is in the band and plays the " + instrument
+    return (str)
+
+
+
+
+
 }
